@@ -7,29 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C30F0A629390FC6002C3068 /* ServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C30F0A529390FC6002C3068 /* ServiceCollectionViewCell.swift */; };
-		4C30F0A829391842002C3068 /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C30F0A729391842002C3068 /* SelectDateViewController.swift */; };
 		4C55034529379F3600699589 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55034429379F3600699589 /* AppDelegate.swift */; };
 		4C55034729379F3600699589 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55034629379F3600699589 /* SceneDelegate.swift */; };
-		4C55034929379F3600699589 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C55034829379F3600699589 /* ViewController.swift */; };
-		4C55034C29379F3600699589 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C55034A29379F3600699589 /* Main.storyboard */; };
 		4C55034E29379F3900699589 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C55034D29379F3900699589 /* Assets.xcassets */; };
 		4C55035129379F3900699589 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C55034F29379F3900699589 /* LaunchScreen.storyboard */; };
-		4C5503592937D32A00699589 /* NovoServicoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5503582937D32A00699589 /* NovoServicoViewController.swift */; };
+		641E8A1C297DC86500DC3715 /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E8A1B297DC86500DC3715 /* ServiceViewController.swift */; };
+		641E8A1F297DC87600DC3715 /* ServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E8A1E297DC87600DC3715 /* ServiceView.swift */; };
+		641E8A22297F2B6B00DC3715 /* SeviceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E8A21297F2B6B00DC3715 /* SeviceViewCell.swift */; };
+		641E8A27297F72C800DC3715 /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E8A26297F72C800DC3715 /* ServiceModel.swift */; };
+		641E8A29297F730900DC3715 /* ServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E8A28297F730900DC3715 /* ServiceViewModel.swift */; };
+		641E8A2E2980C09800DC3715 /* DateSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E8A2D2980C09800DC3715 /* DateSelectViewController.swift */; };
+		641E8A302980C20500DC3715 /* DateSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E8A2F2980C20500DC3715 /* DateSelectView.swift */; };
+		641E8A32298170E600DC3715 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E8A31298170E600DC3715 /* HomeViewModel.swift */; };
+		6474A54E2972124100885F2C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474A54D2972124100885F2C /* HomeViewController.swift */; };
+		6474A551297502F800885F2C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474A550297502F800885F2C /* HomeView.swift */; };
+		6474A5532975033600885F2C /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474A5522975033600885F2C /* ConfigurableView.swift */; };
+		64DFF950297CC168006996BF /* ServiceCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DFF94F297CC168006996BF /* ServiceCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4C30F0A529390FC6002C3068 /* ServiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCollectionViewCell.swift; sourceTree = "<group>"; };
-		4C30F0A729391842002C3068 /* SelectDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateViewController.swift; sourceTree = "<group>"; };
 		4C55034129379F3600699589 /* PoliServices.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoliServices.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C55034429379F3600699589 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C55034629379F3600699589 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4C55034829379F3600699589 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4C55034B29379F3600699589 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C55034D29379F3900699589 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C55035029379F3900699589 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C55035229379F3900699589 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C5503582937D32A00699589 /* NovoServicoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovoServicoViewController.swift; sourceTree = "<group>"; };
+		641E8A1B297DC86500DC3715 /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
+		641E8A1E297DC87600DC3715 /* ServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceView.swift; sourceTree = "<group>"; };
+		641E8A21297F2B6B00DC3715 /* SeviceViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeviceViewCell.swift; sourceTree = "<group>"; };
+		641E8A26297F72C800DC3715 /* ServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ServiceModel.swift; path = ../../../../../ServiceModel.swift; sourceTree = "<group>"; };
+		641E8A28297F730900DC3715 /* ServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewModel.swift; sourceTree = "<group>"; };
+		641E8A2D2980C09800DC3715 /* DateSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectViewController.swift; sourceTree = "<group>"; };
+		641E8A2F2980C20500DC3715 /* DateSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectView.swift; sourceTree = "<group>"; };
+		641E8A31298170E600DC3715 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		6474A54D2972124100885F2C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		6474A550297502F800885F2C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		6474A5522975033600885F2C /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
+		64DFF94F297CC168006996BF /* ServiceCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,18 +76,121 @@
 		4C55034329379F3600699589 /* PoliServices */ = {
 			isa = PBXGroup;
 			children = (
-				4C55034429379F3600699589 /* AppDelegate.swift */,
-				4C55034629379F3600699589 /* SceneDelegate.swift */,
-				4C55034829379F3600699589 /* ViewController.swift */,
-				4C55034A29379F3600699589 /* Main.storyboard */,
-				4C30F0A729391842002C3068 /* SelectDateViewController.swift */,
-				4C55034D29379F3900699589 /* Assets.xcassets */,
-				4C55034F29379F3900699589 /* LaunchScreen.storyboard */,
+				641E8A25297F729200DC3715 /* Model */,
+				6474A54B29720FF000885F2C /* Utility */,
+				6474A54929720FD300885F2C /* ViewModel */,
+				6474A54A29720FDA00885F2C /* View */,
+				6474A54829720F2A00885F2C /* Support */,
 				4C55035229379F3900699589 /* Info.plist */,
-				4C5503582937D32A00699589 /* NovoServicoViewController.swift */,
-				4C30F0A529390FC6002C3068 /* ServiceCollectionViewCell.swift */,
 			);
 			path = PoliServices;
+			sourceTree = "<group>";
+		};
+		641E8A1A297DC83C00DC3715 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				641E8A20297E3BDD00DC3715 /* Cell */,
+				641E8A1B297DC86500DC3715 /* ServiceViewController.swift */,
+				641E8A1E297DC87600DC3715 /* ServiceView.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		641E8A20297E3BDD00DC3715 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				641E8A21297F2B6B00DC3715 /* SeviceViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		641E8A23297F723400DC3715 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				641E8A28297F730900DC3715 /* ServiceViewModel.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		641E8A24297F723E00DC3715 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				641E8A31298170E600DC3715 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		641E8A25297F729200DC3715 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				641E8A26297F72C800DC3715 /* ServiceModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		641E8A2A2980BEED00DC3715 /* SelectDate */ = {
+			isa = PBXGroup;
+			children = (
+				641E8A2D2980C09800DC3715 /* DateSelectViewController.swift */,
+				641E8A2F2980C20500DC3715 /* DateSelectView.swift */,
+			);
+			path = SelectDate;
+			sourceTree = "<group>";
+		};
+		6474A54829720F2A00885F2C /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				4C55034429379F3600699589 /* AppDelegate.swift */,
+				4C55034629379F3600699589 /* SceneDelegate.swift */,
+				4C55034D29379F3900699589 /* Assets.xcassets */,
+				4C55034F29379F3900699589 /* LaunchScreen.storyboard */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		6474A54929720FD300885F2C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				641E8A24297F723E00DC3715 /* Home */,
+				641E8A23297F723400DC3715 /* Service */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6474A54A29720FDA00885F2C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6474A54C2972122600885F2C /* Home */,
+				641E8A2A2980BEED00DC3715 /* SelectDate */,
+				641E8A1A297DC83C00DC3715 /* Service */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6474A54B29720FF000885F2C /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				6474A5522975033600885F2C /* ConfigurableView.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		6474A54C2972122600885F2C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				64DFF94E297CC11F006996BF /* Card */,
+				6474A550297502F800885F2C /* HomeView.swift */,
+				6474A54D2972124100885F2C /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		64DFF94E297CC11F006996BF /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				64DFF94F297CC168006996BF /* ServiceCardView.swift */,
+			);
+			path = Card;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +254,6 @@
 			files = (
 				4C55035129379F3900699589 /* LaunchScreen.storyboard in Resources */,
 				4C55034E29379F3900699589 /* Assets.xcassets in Resources */,
-				4C55034C29379F3600699589 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,11 +264,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C30F0A829391842002C3068 /* SelectDateViewController.swift in Sources */,
-				4C30F0A629390FC6002C3068 /* ServiceCollectionViewCell.swift in Sources */,
-				4C55034929379F3600699589 /* ViewController.swift in Sources */,
+				641E8A32298170E600DC3715 /* HomeViewModel.swift in Sources */,
+				641E8A302980C20500DC3715 /* DateSelectView.swift in Sources */,
+				6474A5532975033600885F2C /* ConfigurableView.swift in Sources */,
+				641E8A29297F730900DC3715 /* ServiceViewModel.swift in Sources */,
+				641E8A1F297DC87600DC3715 /* ServiceView.swift in Sources */,
+				641E8A2E2980C09800DC3715 /* DateSelectViewController.swift in Sources */,
 				4C55034529379F3600699589 /* AppDelegate.swift in Sources */,
-				4C5503592937D32A00699589 /* NovoServicoViewController.swift in Sources */,
+				641E8A22297F2B6B00DC3715 /* SeviceViewCell.swift in Sources */,
+				641E8A1C297DC86500DC3715 /* ServiceViewController.swift in Sources */,
+				64DFF950297CC168006996BF /* ServiceCardView.swift in Sources */,
+				6474A551297502F800885F2C /* HomeView.swift in Sources */,
+				641E8A27297F72C800DC3715 /* ServiceModel.swift in Sources */,
+				6474A54E2972124100885F2C /* HomeViewController.swift in Sources */,
 				4C55034729379F3600699589 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,14 +284,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4C55034A29379F3600699589 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4C55034B29379F3600699589 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4C55034F29379F3900699589 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -307,11 +423,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Poli Services";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -341,11 +456,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Poli Services";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

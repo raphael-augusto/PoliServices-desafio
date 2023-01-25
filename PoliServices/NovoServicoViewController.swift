@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+@available(iOS 13.0, *)
 class NovoServiceViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
