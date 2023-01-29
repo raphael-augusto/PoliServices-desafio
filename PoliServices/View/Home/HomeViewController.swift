@@ -10,7 +10,9 @@ import UIKit
 @available(iOS 13.0, *)
 class HomeViewController: UIViewController{
     
+    //MARK: - Variables
     private var timer: Timer?
+    
     
     //MARK: - ViewModel
     private var homeViewModel = HomeViewModel()
@@ -33,7 +35,7 @@ class HomeViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initTimer()
+        homeViewModel.initTimer(setup: setup )
     }
     
     
@@ -63,22 +65,6 @@ class HomeViewController: UIViewController{
             self.homeView.cardServiceIsHidden(active: !hasService)
             self.homeView.serviceButtonIsHidden(active: hasService)
         }
-    }
-    
-    
-    private func initTimer() {
-        let now: Date = Date()
-        let calendar: Calendar = Calendar.current
-        let currentSeconds: Int = calendar.component(.second, from: now)
-        let timer = Timer(
-            fire: now.addingTimeInterval(Double(60 - currentSeconds + 1)),
-            interval: 60,
-            repeats: true,
-            block: { (t: Timer) in
-                self.setup()
-            })
-        RunLoop.main.add(timer, forMode: .default)
-        self.timer = timer
     }
 }
 
