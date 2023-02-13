@@ -65,6 +65,13 @@ final class HomeViewModel {
     }
     
     
+    func removeUserDefaults() {
+        UserDefaults.standard.removeObject(forKey: "service_date")
+        UserDefaults.standard.removeObject(forKey: "service_name")
+        UserDefaults.standard.removeObject(forKey: "service_color")
+    }
+    
+    
     func setupService(serviceDate: String) -> Date {
         let currentDate = Date()
 
