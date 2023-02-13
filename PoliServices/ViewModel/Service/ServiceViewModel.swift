@@ -13,7 +13,7 @@ protocol ServiceViewModelProtocols: AnyObject {
     func failure()
 }
 
-class ServiceViewModel {
+final class ServiceViewModel {
 
     //MARK: - Delegate and networking
     private let networking = Networking()
