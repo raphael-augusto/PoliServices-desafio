@@ -47,18 +47,24 @@ class HomeViewController: UIViewController{
     
     private func setup() {
         let currentDate = Date()
-        guard let serviceName = UserDefaults.standard.string(forKey: "service_name") else { return }
-        guard let serviceDate = UserDefaults.standard.string(forKey: "service_date") else { return }
+        guard let serviceName  = UserDefaults.standard.string(forKey: "service_name")  else { return }
+        guard let serviceColor = UserDefaults.standard.string(forKey: "service_color") else { return }
+        guard let serviceDate  = UserDefaults.standard.string(forKey: "service_date")  else { return }
 
         let data = homeViewModel.setupService(serviceDate: serviceDate)
+        let toCompleteService = homeViewModel.timeLeftToCompleteService(finishDate: data)
         let hasService = data > currentDate
 
         if hasService {
-            homeView.serviceCardView.setupCardService(nameServiceText: serviceName, dateAndHourText: serviceDate)
+            homeView.ToCompleteService(textTime: toCompleteService)
+            homeView.serviceCardView.setupCardService(nameServiceText: serviceName,
+                                                      dateAndHourText: serviceDate,
+                                                      color: serviceColor)
 
         } else {
             UserDefaults.standard.removeObject(forKey: "service_date")
             UserDefaults.standard.removeObject(forKey: "service_name")
+            UserDefaults.standard.removeObject(forKey: "service_color")
         }
 
         HomeView.animate(withDuration: 0.3) {

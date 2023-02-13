@@ -13,7 +13,9 @@ class DateSelectViewController: UIViewController {
 
     //MARK: - Variable
     var servico: String?
+    var servicoColor: String?
     var datePicker: String?
+    var serviceDuration: Int?
     
     
     //MARK: - Properts
@@ -36,9 +38,15 @@ class DateSelectViewController: UIViewController {
         config()
     }
     
-    init(servico: String? = nil) {
+    init(
+        servico: String? = nil,
+        servicoColor: String? = nil,
+        serviceDuration: Int? = nil
+    ) {
         super.init(nibName: nil, bundle: nil)
         self.servico = servico
+        self.servicoColor = servicoColor
+        self.serviceDuration = serviceDuration
     }
     
     required init?(coder: NSCoder) {
@@ -60,6 +68,7 @@ extension DateSelectViewController {
     @objc func rightHandAction() {
         UserDefaults.standard.set(datePicker, forKey: "service_date")
         UserDefaults.standard.set(servico, forKey: "service_name")
+        UserDefaults.standard.set(servicoColor, forKey: "service_color")
         
         self.dismiss(animated: true,completion: nil)
     }
@@ -69,17 +78,23 @@ extension DateSelectViewController {
 //MARK: - Action
 @available(iOS 13.0, *)
 extension DateSelectViewController: DateSelectViewDelegate {
-    
+        
     func datePickerValueChanged(_ sender: UIDatePicker) {
         // Create date formatter
-        let dateFormatter: DateFormatter = DateFormatter()
+        let formatter = DateFormatter()
         
         // Set date format
-        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+        formatter.dateFormat = "MM/dd/yyyy HH:mm"
         
-        // Apply date format
-        let selectedDate: String = dateFormatter.string(from: sender.date)
+        //let hours = Double(serviceDuration!) / 60
+        //let minutes = Double(serviceDuration!).truncatingRemainder(dividingBy: 60)
         
-        datePicker = selectedDate
+        // Apply date format and hour
+        var selectedDate = sender.date
+        selectedDate = selectedDate.addingTimeInterval(Double(serviceDuration!) * 60)
+        
+        let addedTimeString = formatter.string(from: selectedDate)
+        
+        datePicker = addedTimeString
     }
 }

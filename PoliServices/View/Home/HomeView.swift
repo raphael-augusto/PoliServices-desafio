@@ -96,7 +96,7 @@ final class  HomeView : UIView {
     
     private lazy var cardServiceStackView: UIView = {
         let stackView = UIStackView( arrangedSubviews: [
-            nextServiceLabel,
+            containerServiceStackView,
             serviceCardView
         ])
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -109,12 +109,33 @@ final class  HomeView : UIView {
     }()
     
     
+    private lazy var containerServiceStackView: UIView = {
+        let stackView = UIStackView( arrangedSubviews: [
+            nextServiceLabel,
+            timeLeftToCompleteServiceLabel
+        ])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        
+        return stackView
+    }()
+    
     
     private lazy var nextServiceLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont.boldSystemFont(ofSize: 16)
         lb.text = "Próximo Serviço"
+        
+        return lb
+    }()
+    
+    private lazy var timeLeftToCompleteServiceLabel: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.font = UIFont.systemFont(ofSize: 15)
+        lb.text = "Tempo de para finalizar"
         
         return lb
     }()
@@ -167,9 +188,15 @@ final class  HomeView : UIView {
         cardServiceStackView.alpha    = active ? 0 : 1
     }
     
+    
     public func serviceButtonIsHidden(active: Bool) {
         serviceButton.isHidden = active
         serviceButton.alpha    = active ? 0 : 1
+    }
+    
+    
+    public func ToCompleteService(textTime: String) {
+        timeLeftToCompleteServiceLabel.text = textTime
     }
 }
 
