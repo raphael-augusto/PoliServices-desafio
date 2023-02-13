@@ -35,31 +35,24 @@ class HomeViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        homeViewModel.initTimer(setup: setup )
+        homeViewModel.initTimer(setup: setupUI )
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setup()
+        setupUI()
     }
     
     
-    private func setup() {
-        let currentDate = Date()
-        guard let serviceName  = UserDefaults.standard.string(forKey: "service_name")  else { return }
-        guard let serviceColor = UserDefaults.standard.string(forKey: "service_color") else { return }
-        guard let serviceDate  = UserDefaults.standard.string(forKey: "service_date")  else { return }
+    private func setupUI() {
+        let setupData = homeViewModel.setup()
 
-        let data = homeViewModel.setupService(serviceDate: serviceDate)
-        let toCompleteService = homeViewModel.timeLeftToCompleteService(finishDate: data)
-        let hasService = data > currentDate
-
-        if hasService {
-            homeView.ToCompleteService(textTime: toCompleteService)
-            homeView.serviceCardView.setupCardService(nameServiceText: serviceName,
-                                                      dateAndHourText: serviceDate,
-                                                      color: serviceColor)
+        if setupData.hasService {
+            homeView.ToCompleteService(textTime: setupData.toCompleteService)
+            homeView.serviceCardView.setupCardService(nameServiceText: setupData.serviceName,
+                                                      dateAndHourText: setupData.serviceDate,
+                                                      color: setupData.serviceColor)
 
         } else {
             UserDefaults.standard.removeObject(forKey: "service_date")
@@ -68,8 +61,8 @@ class HomeViewController: UIViewController{
         }
 
         HomeView.animate(withDuration: 0.3) {
-            self.homeView.cardServiceIsHidden(active: !hasService)
-            self.homeView.serviceButtonIsHidden(active: hasService)
+            self.homeView.cardServiceIsHidden(active: !setupData.hasService)
+            self.homeView.serviceButtonIsHidden(active: setupData.hasService)
         }
     }
 }

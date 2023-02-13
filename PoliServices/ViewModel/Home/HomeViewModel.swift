@@ -8,13 +8,47 @@
 import Foundation
 
 
-class HomeViewModel {
+
+final class HomeViewModel {
     
     //MARK: - Variables
     private var timer: Timer?
     
 
     //MARK: - Rules functions
+    func setup() -> SetupData {
+        let currentDate = Date()
+        guard let serviceName  = UserDefaults.standard.string(forKey: "service_name")  else { return SetupData(toCompleteService: "",
+                                                                                                               hasService: false,
+                                                                                                               serviceName: "",
+                                                                                                               serviceColor: "",
+                                                                                                               serviceDate: "") }
+        
+        guard let serviceColor = UserDefaults.standard.string(forKey: "service_color") else { return SetupData(toCompleteService: "",
+                                                                                                               hasService: false,
+                                                                                                               serviceName: "",
+                                                                                                               serviceColor: "",
+                                                                                                               serviceDate: "") }
+        
+        guard let serviceDate  = UserDefaults.standard.string(forKey: "service_date")  else { return SetupData(toCompleteService: "",
+                                                                                                               hasService: false,
+                                                                                                               serviceName: "",
+                                                                                                               serviceColor: "",
+                                                                                                               serviceDate: "") }
+        
+        let data = setupService(serviceDate: serviceDate)
+        let toCompleteService = timeLeftToCompleteService(finishDate: data)
+        let hasService = data > currentDate
+        
+        return SetupData(toCompleteService: toCompleteService,
+                         hasService: hasService,
+                         serviceName: serviceName,
+                         serviceColor: serviceColor,
+                         serviceDate: serviceDate)
+    }
+    
+    
+    
     func timeLeftToCompleteService(finishDate: Date) -> String {
         let currentDate = Date()
         let timeInterval = finishDate.timeIntervalSince(currentDate)
