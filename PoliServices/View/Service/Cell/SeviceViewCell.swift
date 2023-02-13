@@ -19,11 +19,12 @@ final class SeviceViewCell: UICollectionViewCell {
     private lazy var stackViewContainer: UIStackView = {
         let stackView = UIStackView( arrangedSubviews: [
             serviceDescriptionImage,
-            serviceDescriptionLabel
+            serviceDescriptionLabel,
+            durationLabel
         ])
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = .zero
+        stackView.axis      = .vertical
+        stackView.spacing   = .zero
         stackView.alignment = .center
         
         return stackView
@@ -31,7 +32,7 @@ final class SeviceViewCell: UICollectionViewCell {
     
     
     private lazy var serviceDescriptionImage: UIImageView = {
-        let img = UIImage(systemName: "arrow.clockwise.icloud.fill")
+        let img   = UIImage(systemName: "arrow.clockwise.icloud.fill")
         let image = UIImageView(image: img)
         image.tintColor = .systemBlue
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +49,15 @@ final class SeviceViewCell: UICollectionViewCell {
         return lb
     }()
     
+    private lazy var durationLabel: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.font = UIFont.boldSystemFont(ofSize: 12)
+        lb.text = "Duração: 00:00"
+        
+        return lb
+    }()
+
     
     //MARK: - Inits
     override init(frame: CGRect) {
@@ -69,27 +79,25 @@ final class SeviceViewCell: UICollectionViewCell {
     
     
     public func setupCell(cell: ServiceData) {
-//        let img = UIImage(systemName: cell.icon ?? "arrow.clockwise.icloud.fill")
-//
-//        self.serviceDescriptionImage.image  = img
-        self.serviceDescriptionLabel.text   = cell.descriptionName
-    }
-    
-    
-    public func setupImagetintColor(color: String, icon: String) {
-        let img = UIImage(systemName: icon)
+        let img           = UIImage(systemName: cell.icon)
+        let color         = UIColor(hexString: cell.color).cgColor
+        let formattedTime = String.formatTime(totalMinutes: cell.duration)
         
-        self.serviceDescriptionImage.tintColor = UIColor(named: color)
-        self.serviceDescriptionImage.image  = img
+        
+        self.serviceDescriptionImage.image      = img
+        self.serviceDescriptionLabel.text       = cell.name
+        self.serviceDescriptionImage.tintColor  = UIColor(cgColor: color)
+        self.durationLabel.text                 = "Duração: \(formattedTime)h"
     }
+    
 }
 
 //MARK: - Components and Constraints
 @available(iOS 13.0, *)
 extension SeviceViewCell : ConfigurableView {
     func initView() {
-        backgroundColor = .white
-        layer.cornerRadius = 10
+        backgroundColor     = .white
+        layer.cornerRadius  = 10
     }
     
     func initSubviews() {
@@ -103,8 +111,8 @@ extension SeviceViewCell : ConfigurableView {
             stackViewContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             stackViewContainer.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
             
-            serviceDescriptionImage.widthAnchor.constraint(equalToConstant: 60),
-            serviceDescriptionImage.heightAnchor.constraint(equalToConstant: 60),
+            serviceDescriptionImage.widthAnchor.constraint(equalToConstant: 70),
+            serviceDescriptionImage.heightAnchor.constraint(equalToConstant: 70),
         ])
     }
     

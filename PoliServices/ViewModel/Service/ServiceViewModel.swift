@@ -8,18 +8,43 @@
 import UIKit
 
 
-protocol DescriptionProtocol {
-    var descriptionName: String? { get }
-//    var icon: String? { get }
+protocol ServiceViewModelProtocols: AnyObject {
+    func success()
+    func failure()
 }
 
 class ServiceViewModel {
 
-    private(set) var dataValue: [DescriptionProtocol]  = [ServiceData(descriptionName: "Código"),//,  icon: "pencil.slash"),
-                                                          ServiceData(descriptionName: "Carreira"),//,icon: "graduationcap.circle.fill"),
-                                                          ServiceData(descriptionName: "Entrevista"), //,icon: "books.vertical.fill"),
-                                                          ServiceData(descriptionName: "Feedback") //,icon: "scribble.variable"),
-    ]
+    //MARK: - Delegate and networking
+    private let networking = Networking()
+    weak var delegate: (ServiceViewModelProtocols)?
+    
+    private(set) var dataValue: [ServiceData]  = []
+    
+
+    init(delegate: ServiceViewModelProtocols) {
+        self.delegate = delegate
+    }
+    
+    
+    //MARK: - Request api
+    func fetchcCursesData() {
+        networking.load(endpoint: .services) { [weak self] (response: Result<Service, NetworkinError>) in
+            guard let self = self else { return }
+            
+            switch response {
+            case let .success(data):
+                self.dataValue = data.data
+                self.delegate?.success()
+                
+                print("Data -> \(self.dataValue)")
+                
+            case let .failure(error):
+                print("ViewModel -> \(error.localizedDescription)")
+                self.delegate?.failure()
+            }
+        }
+    }
     
     
     var count: Int {
@@ -27,7 +52,7 @@ class ServiceViewModel {
     }
     
     
-    func getNames(indexPath: IndexPath) -> DescriptionProtocol {
+    func getNames(indexPath: IndexPath) -> ServiceData {
         return dataValue[indexPath.row]
     }
 }

@@ -100,9 +100,12 @@ final class ServiceCardView: UIView {
     
     
     //MARK: - Func Config
-    public func setupCardService(nameServiceText: String, dateAndHourText: String){
+    public func setupCardService(nameServiceText: String, dateAndHourText: String, color: String){
+        let colorData = UIColor(hexString: color).cgColor
+        
         cardLabel.text              = nameServiceText
         DateAndHourCardLabel.text   = dateAndHourText
+        backgroundColor             = UIColor(cgColor: colorData)
     }
 }
 

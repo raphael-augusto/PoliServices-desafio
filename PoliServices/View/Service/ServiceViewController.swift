@@ -12,8 +12,7 @@ import UIKit
 class ServiceViewController: UIViewController {
 
     //MARK: - ViewModel
-    private var serviceViewModel = ServiceViewModel()
-    
+    private var serviceViewModel: ServiceViewModel?
     
     
     //MARK: - Properts
@@ -31,8 +30,10 @@ class ServiceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.serviceViewModel = ServiceViewModel(delegate: self)
+
         config()
+        getData()
     }
 }
 
@@ -54,6 +55,25 @@ extension ServiceViewController {
 
 }
 
+//MARK: - API
+@available(iOS 13.0, *)
+extension ServiceViewController: ServiceViewModelProtocols {
+    func success() {
+        DispatchQueue.main.async { [self] in
+            serviceView.loadResultCollectionView()
+        }
+    }
+    
+    func failure() {
+        print("Error")
+    }
+    
+    
+    func getData() {
+        serviceViewModel?.fetchcCursesData()
+     }
+}
+
 
 //MARK: - Collection
 @available(iOS 13.0, *)
@@ -65,7 +85,7 @@ extension ServiceViewController: UICollectionViewDataSource, UICollectionViewDel
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return serviceViewModel.count
+        return serviceViewModel?.count ?? 0
     }
     
     
@@ -73,55 +93,19 @@ extension ServiceViewController: UICollectionViewDataSource, UICollectionViewDel
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SeviceViewCell.identifier, for: indexPath) as? SeviceViewCell else { return UICollectionViewCell() }
         
-        cell.setupCell(cell: serviceViewModel.getNames(indexPath: indexPath) as! ServiceData)
-
+        cell.setupCell(cell: (serviceViewModel?.getNames(indexPath: indexPath))!)
         
-        switch indexPath.row {
-        case 0:
-            cell.setupImagetintColor(color: "cyan", icon: "pencil.slash")
-        case 1:
-            cell.setupImagetintColor(color: "green", icon: "graduationcap.circle.fill")
-        case 2:
-            cell.setupImagetintColor(color: "pink", icon: "books.vertical.fill")
-        case 3:
-            cell.setupImagetintColor(color: "brown", icon: "scribble.variable")
-        default:
-            break
-        }
-
         return cell
     }
     
+    
     //cell selection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let dataIndexPath = self.serviceViewModel.getNames(indexPath: indexPath).descriptionName else { return }
-
-        switch indexPath.row {
-        case 0:
-            print(dataIndexPath)
-            let newService = DateSelectViewController(servico: dataIndexPath)
-            self.navigationController?.pushViewController(newService, animated: true)
-            
-        case 1:
-            print(dataIndexPath)
-            let newService = DateSelectViewController(servico: dataIndexPath)
-            self.navigationController?.pushViewController(newService, animated: true)
-            
-        case 2:
-            print(dataIndexPath)
-            let newService = DateSelectViewController(servico: dataIndexPath)
-            self.navigationController?.pushViewController(newService, animated: true)
-            
-        case 3:
-            print(dataIndexPath)
-            let newService = DateSelectViewController(servico: dataIndexPath)
-            self.navigationController?.pushViewController(newService, animated: true)
-            
-        default:
-            break
-        }
+        guard let dataIndexPath = self.serviceViewModel?.getNames(indexPath: indexPath)else { return }
+        
+        let newService = DateSelectViewController(servico: dataIndexPath.name,
+                                                  servicoColor: dataIndexPath.color,
+                                                  serviceDuration: dataIndexPath.duration)
+        self.navigationController?.pushViewController(newService, animated: true)
     }
 }
-
-
-
