@@ -55,9 +55,7 @@ class HomeViewController: UIViewController{
                                                       color: setupData.serviceColor)
 
         } else {
-            UserDefaults.standard.removeObject(forKey: "service_date")
-            UserDefaults.standard.removeObject(forKey: "service_name")
-            UserDefaults.standard.removeObject(forKey: "service_color")
+            homeViewModel.removeUserDefaults()
         }
 
         HomeView.animate(withDuration: 0.3) {
