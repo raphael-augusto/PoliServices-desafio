@@ -12,6 +12,7 @@ class HomeViewController: UIViewController{
     
     //MARK: - Variables
     private var timer: Timer?
+    private var alert: Alert?
     
     
     //MARK: - ViewModel
@@ -27,6 +28,7 @@ class HomeViewController: UIViewController{
     }()
     
     
+    //MARK: - life cycle
     override func loadView() {
         self.view = homeView
     }
@@ -34,8 +36,10 @@ class HomeViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.alert = Alert(controller: self)
         
         homeViewModel.initTimer(setup: setupUI )
+        alertCheck()
     }
     
     
@@ -43,14 +47,20 @@ class HomeViewController: UIViewController{
         super.viewDidAppear(animated)
         setupUI()
     }
-    
+}
+
+
+//MARK: - Setup UI Screen
+@available(iOS 13.0, *)
+extension HomeViewController {
     
     private func setupUI() {
         let setupData = homeViewModel.setup()
-
+        
         if setupData.hasService {
             homeView.ToCompleteService(textTime: setupData.toCompleteService)
-            homeView.serviceCardView.setupCardService(nameServiceText: setupData.serviceName,
+            homeView.serviceCardView.setupCardService(icon: setupData.serviceIcon,
+                                                      nameServiceText: setupData.serviceName,
                                                       dateAndHourText: setupData.serviceDate,
                                                       color: setupData.serviceColor)
 
@@ -63,9 +73,33 @@ class HomeViewController: UIViewController{
             self.homeView.serviceButtonIsHidden(active: setupData.hasService)
         }
     }
+    
 }
 
 
+//MARK: - check out alert
+@available(iOS 13.0, *)
+extension HomeViewController {
+    
+    private func alertCheck() {
+        let dataTime = homeViewModel.timeService()
+        if dataTime {
+            alertService()
+        }
+    }
+    
+    private func alertService() {
+        self.alert?.getVerificateAlert(title: "Atenção", message: "Deseja cancelar o serviço", okCompletion: {
+            let detailsService = DetailsViewController()
+            let navVC  = UINavigationController(rootViewController: detailsService)
+            navVC.modalPresentationStyle = .fullScreen
+            self.present(navVC, animated: true, completion: nil)
+        })
+    }
+}
+
+
+//MARK: - Navigation newService
 @available(iOS 13.0, *)
 extension HomeViewController: HomeViewDelegate {
     

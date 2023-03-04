@@ -135,6 +135,7 @@ final class  HomeView : UIView {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont.systemFont(ofSize: 15)
+        lb.numberOfLines = 2
         lb.text = "Tempo de para finalizar"
         
         return lb

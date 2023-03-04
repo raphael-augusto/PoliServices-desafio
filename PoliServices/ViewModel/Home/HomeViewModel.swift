@@ -18,23 +18,38 @@ final class HomeViewModel {
     //MARK: - Rules functions
     func setup() -> SetupData {
         let currentDate = Date()
-        guard let serviceName  = UserDefaults.standard.string(forKey: "service_name")  else { return SetupData(toCompleteService: "",
+        guard let serviceIcon  = UserDefaults.standard.string(forKey: "service_icon")  else { return SetupData(toCompleteService: "",
                                                                                                                hasService: false,
+                                                                                                               createDate: "",
                                                                                                                serviceName: "",
                                                                                                                serviceColor: "",
-                                                                                                               serviceDate: "") }
+                                                                                                               serviceDate: "",
+                                                                                                               serviceIcon: "") }
+        
+        guard let serviceName  = UserDefaults.standard.string(forKey: "service_name")  else { return SetupData(toCompleteService: "",
+                                                                                                               hasService: false,
+                                                                                                               createDate: "",
+                                                                                                               serviceName: "",
+                                                                                                               serviceColor: "",
+                                                                                                               serviceDate: "",
+                                                                                                               serviceIcon: "") }
         
         guard let serviceColor = UserDefaults.standard.string(forKey: "service_color") else { return SetupData(toCompleteService: "",
                                                                                                                hasService: false,
+                                                                                                               createDate: "",
                                                                                                                serviceName: "",
                                                                                                                serviceColor: "",
-                                                                                                               serviceDate: "") }
+                                                                                                               serviceDate: "",
+                                                                                                               serviceIcon: "") }
         
         guard let serviceDate  = UserDefaults.standard.string(forKey: "service_date")  else { return SetupData(toCompleteService: "",
                                                                                                                hasService: false,
+                                                                                                               createDate: "",
                                                                                                                serviceName: "",
                                                                                                                serviceColor: "",
-                                                                                                               serviceDate: "") }
+                                                                                                               serviceDate: "",
+                                                                                                               serviceIcon: "") }
+
         
         let data = setupService(serviceDate: serviceDate)
         let toCompleteService = timeLeftToCompleteService(finishDate: data)
@@ -42,9 +57,11 @@ final class HomeViewModel {
         
         return SetupData(toCompleteService: toCompleteService,
                          hasService: hasService,
+                         createDate: "",
                          serviceName: serviceName,
                          serviceColor: serviceColor,
-                         serviceDate: serviceDate)
+                         serviceDate: serviceDate,
+                         serviceIcon: serviceIcon)
     }
     
     
@@ -65,9 +82,24 @@ final class HomeViewModel {
     }
     
     
+    func timeService() -> Bool {
+        let serviceDate  = UserDefaults.standard.string(forKey: "service_date") ?? ""
+        let data = setupService(serviceDate: serviceDate)
+        
+        let currentDate = Date()
+        let timeInterval = data.timeIntervalSince(currentDate)
+        let hoursLeft = Int(timeInterval / 3600)
+        let minutesLeft = Int((timeInterval.truncatingRemainder(dividingBy: 3600)) / 60)
+
+        return hoursLeft == 0 && minutesLeft == 15 ? true : false
+    }
+    
+    
+    
     func removeUserDefaults() {
         UserDefaults.standard.removeObject(forKey: "service_date")
         UserDefaults.standard.removeObject(forKey: "service_name")
+        UserDefaults.standard.removeObject(forKey: "service_icon")
         UserDefaults.standard.removeObject(forKey: "service_color")
     }
     
