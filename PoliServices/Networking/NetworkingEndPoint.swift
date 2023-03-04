@@ -8,5 +8,7 @@
 import Foundation
 
 enum NetworkingEndPoint: String {
-    case services = "services"
+    case services      = "services"
+    case reasons       = "reasons"
+    case cancelReason  = "cancel/reason"
 }

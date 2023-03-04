@@ -11,6 +11,7 @@ enum NetworkinError: Error {
     case invalidURL
     case errorGeneric(description: String)
     case invalidResponse
+    case invalidPost
     case invalidData
     case errorDecoder
 }

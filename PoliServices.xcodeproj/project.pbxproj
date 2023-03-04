@@ -19,6 +19,10 @@
 		641E8A2E2980C09800DC3715 /* DateSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E8A2D2980C09800DC3715 /* DateSelectViewController.swift */; };
 		641E8A302980C20500DC3715 /* DateSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E8A2F2980C20500DC3715 /* DateSelectView.swift */; };
 		641E8A32298170E600DC3715 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E8A31298170E600DC3715 /* HomeViewModel.swift */; };
+		6439A3D229AAE02100E95399 /* Ext+UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6439A3D129AAE02100E95399 /* Ext+UIResponder.swift */; };
+		6439A3D429AC57F100E95399 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6439A3D329AC57F100E95399 /* DetailsViewModel.swift */; };
+		6439A3D829AC58AF00E95399 /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6439A3D729AC58AF00E95399 /* DetailsModel.swift */; };
+		6439A3DB29AD904600E95399 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6439A3DA29AD904600E95399 /* Alert.swift */; };
 		6474A54E2972124100885F2C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474A54D2972124100885F2C /* HomeViewController.swift */; };
 		6474A551297502F800885F2C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474A550297502F800885F2C /* HomeView.swift */; };
 		6474A5532975033600885F2C /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474A5522975033600885F2C /* ConfigurableView.swift */; };
@@ -28,6 +32,9 @@
 		647EE4A629945CA50091722D /* Ext+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647EE4A529945CA50091722D /* Ext+Color.swift */; };
 		647EE4A82995F44F0091722D /* Ext+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647EE4A72995F44F0091722D /* Ext+String.swift */; };
 		647EE4AA299A9DBC0091722D /* SetupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647EE4A9299A9DBC0091722D /* SetupModel.swift */; };
+		647EE4AD299DB9340091722D /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647EE4AC299DB9340091722D /* DetailsViewController.swift */; };
+		647EE4AF299DB9520091722D /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647EE4AE299DB9520091722D /* DetailsView.swift */; };
+		6480064829AFD4B200092383 /* ReasonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6480064729AFD4B200092383 /* ReasonModel.swift */; };
 		64DFF950297CC168006996BF /* ServiceCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DFF94F297CC168006996BF /* ServiceCardView.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +53,10 @@
 		641E8A2D2980C09800DC3715 /* DateSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectViewController.swift; sourceTree = "<group>"; };
 		641E8A2F2980C20500DC3715 /* DateSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectView.swift; sourceTree = "<group>"; };
 		641E8A31298170E600DC3715 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		6439A3D129AAE02100E95399 /* Ext+UIResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UIResponder.swift"; sourceTree = "<group>"; };
+		6439A3D329AC57F100E95399 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		6439A3D729AC58AF00E95399 /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
+		6439A3DA29AD904600E95399 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		6474A54D2972124100885F2C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6474A550297502F800885F2C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		6474A5522975033600885F2C /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
@@ -55,6 +66,9 @@
 		647EE4A529945CA50091722D /* Ext+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+Color.swift"; sourceTree = "<group>"; };
 		647EE4A72995F44F0091722D /* Ext+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+String.swift"; sourceTree = "<group>"; };
 		647EE4A9299A9DBC0091722D /* SetupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupModel.swift; sourceTree = "<group>"; };
+		647EE4AC299DB9340091722D /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		647EE4AE299DB9520091722D /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		6480064729AFD4B200092383 /* ReasonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonModel.swift; sourceTree = "<group>"; };
 		64DFF94F297CC168006996BF /* ServiceCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,9 +102,10 @@
 		4C55034329379F3600699589 /* PoliServices */ = {
 			isa = PBXGroup;
 			children = (
+				6439A3D929AD901B00E95399 /* Extension */,
+				6474A54B29720FF000885F2C /* Utility */,
 				648E2F372989E8690098F504 /* Networking */,
 				641E8A25297F729200DC3715 /* Model */,
-				6474A54B29720FF000885F2C /* Utility */,
 				6474A54929720FD300885F2C /* ViewModel */,
 				6474A54A29720FDA00885F2C /* View */,
 				6474A54829720F2A00885F2C /* Support */,
@@ -138,6 +153,8 @@
 			children = (
 				641E8A26297F72C800DC3715 /* ServiceModel.swift */,
 				647EE4A9299A9DBC0091722D /* SetupModel.swift */,
+				6439A3D729AC58AF00E95399 /* DetailsModel.swift */,
+				6480064729AFD4B200092383 /* ReasonModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -149,6 +166,24 @@
 				641E8A2D2980C09800DC3715 /* DateSelectViewController.swift */,
 			);
 			path = SelectDate;
+			sourceTree = "<group>";
+		};
+		6439A3D529AC57FD00E95399 /* DetailsViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6439A3D329AC57F100E95399 /* DetailsViewModel.swift */,
+			);
+			path = DetailsViewModel;
+			sourceTree = "<group>";
+		};
+		6439A3D929AD901B00E95399 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				647EE4A529945CA50091722D /* Ext+Color.swift */,
+				647EE4A72995F44F0091722D /* Ext+String.swift */,
+				6439A3D129AAE02100E95399 /* Ext+UIResponder.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		6474A54829720F2A00885F2C /* Support */ = {
@@ -166,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				641E8A24297F723E00DC3715 /* Home */,
+				6439A3D529AC57FD00E95399 /* DetailsViewModel */,
 				641E8A23297F723400DC3715 /* Service */,
 			);
 			path = ViewModel;
@@ -174,6 +210,7 @@
 		6474A54A29720FDA00885F2C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				647EE4AB299DB90D0091722D /* Details */,
 				6474A54C2972122600885F2C /* Home */,
 				641E8A1A297DC83C00DC3715 /* Service */,
 				641E8A2A2980BEED00DC3715 /* SelectDate */,
@@ -185,8 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				6474A5522975033600885F2C /* ConfigurableView.swift */,
-				647EE4A529945CA50091722D /* Ext+Color.swift */,
-				647EE4A72995F44F0091722D /* Ext+String.swift */,
+				6439A3DA29AD904600E95399 /* Alert.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -199,6 +235,15 @@
 				6474A54D2972124100885F2C /* HomeViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		647EE4AB299DB90D0091722D /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				647EE4AC299DB9340091722D /* DetailsViewController.swift */,
+				647EE4AE299DB9520091722D /* DetailsView.swift */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 		648E2F372989E8690098F504 /* Networking */ = {
@@ -297,18 +342,25 @@
 				6474A5532975033600885F2C /* ConfigurableView.swift in Sources */,
 				641E8A29297F730900DC3715 /* ServiceViewModel.swift in Sources */,
 				647EE4A82995F44F0091722D /* Ext+String.swift in Sources */,
+				6480064829AFD4B200092383 /* ReasonModel.swift in Sources */,
 				641E8A1F297DC87600DC3715 /* ServiceView.swift in Sources */,
 				641E8A2E2980C09800DC3715 /* DateSelectViewController.swift in Sources */,
 				647838CC299332E900E3AEDD /* Networking.swift in Sources */,
 				4C55034529379F3600699589 /* AppDelegate.swift in Sources */,
+				6439A3D429AC57F100E95399 /* DetailsViewModel.swift in Sources */,
+				6439A3D229AAE02100E95399 /* Ext+UIResponder.swift in Sources */,
+				647EE4AD299DB9340091722D /* DetailsViewController.swift in Sources */,
 				641E8A22297F2B6B00DC3715 /* SeviceViewCell.swift in Sources */,
 				641E8A1C297DC86500DC3715 /* ServiceViewController.swift in Sources */,
 				64DFF950297CC168006996BF /* ServiceCardView.swift in Sources */,
 				6474A551297502F800885F2C /* HomeView.swift in Sources */,
+				6439A3DB29AD904600E95399 /* Alert.swift in Sources */,
 				647838CF2993332000E3AEDD /* NetworkingEndPoint.swift in Sources */,
+				647EE4AF299DB9520091722D /* DetailsView.swift in Sources */,
 				641E8A27297F72C800DC3715 /* ServiceModel.swift in Sources */,
 				647EE4AA299A9DBC0091722D /* SetupModel.swift in Sources */,
 				6474A54E2972124100885F2C /* HomeViewController.swift in Sources */,
+				6439A3D829AC58AF00E95399 /* DetailsModel.swift in Sources */,
 				4C55034729379F3600699589 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

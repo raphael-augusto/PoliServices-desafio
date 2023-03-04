@@ -104,6 +104,7 @@ extension ServiceViewController: UICollectionViewDataSource, UICollectionViewDel
         guard let dataIndexPath = self.serviceViewModel?.getNames(indexPath: indexPath)else { return }
         
         let newService = DateSelectViewController(servico: dataIndexPath.name,
+                                                  serviceIcon: dataIndexPath.icon,
                                                   servicoColor: dataIndexPath.color,
                                                   serviceDuration: dataIndexPath.duration)
         self.navigationController?.pushViewController(newService, animated: true)

@@ -13,6 +13,7 @@ class DateSelectViewController: UIViewController {
 
     //MARK: - Variable
     var servico: String?
+    var serviceIcon: String?
     var servicoColor: String?
     var datePicker: String?
     var serviceDuration: Int?
@@ -40,12 +41,14 @@ class DateSelectViewController: UIViewController {
     
     init(
         servico: String? = nil,
+        serviceIcon: String? = nil,
         servicoColor: String? = nil,
         serviceDuration: Int? = nil
     ) {
         super.init(nibName: nil, bundle: nil)
-        self.servico = servico
-        self.servicoColor = servicoColor
+        self.servico         = servico
+        self.serviceIcon     = serviceIcon
+        self.servicoColor    = servicoColor
         self.serviceDuration = serviceDuration
     }
     
@@ -68,6 +71,7 @@ extension DateSelectViewController {
     @objc func rightHandAction() {
         UserDefaults.standard.set(datePicker, forKey: "service_date")
         UserDefaults.standard.set(servico, forKey: "service_name")
+        UserDefaults.standard.set(serviceIcon, forKey: "service_icon")
         UserDefaults.standard.set(servicoColor, forKey: "service_color")
         
         self.dismiss(animated: true,completion: nil)

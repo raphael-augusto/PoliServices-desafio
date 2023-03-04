@@ -43,7 +43,8 @@ final class SeviceViewCell: UICollectionViewCell {
     private lazy var serviceDescriptionLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = UIFont.boldSystemFont(ofSize: 20)
+        lb.font = UIFont.boldSystemFont(ofSize: 16)
+//        lb.numberOfLines = 2
         lb.text = "Código"
         
         return lb
