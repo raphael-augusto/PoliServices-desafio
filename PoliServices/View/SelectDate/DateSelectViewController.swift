@@ -18,6 +18,9 @@ class DateSelectViewController: UIViewController {
     var datePicker: String?
     var serviceDuration: Int?
     
+    //MARK: - ViewModel
+    private var dateSelectViewModel = DateSelectViewModel()
+    
     
     //MARK: - Properts
     private lazy var dateSelectView: DateSelectView = {
@@ -69,10 +72,7 @@ extension DateSelectViewController {
     
     
     @objc func rightHandAction() {
-        UserDefaults.standard.set(datePicker, forKey: "service_date")
-        UserDefaults.standard.set(servico, forKey: "service_name")
-        UserDefaults.standard.set(serviceIcon, forKey: "service_icon")
-        UserDefaults.standard.set(servicoColor, forKey: "service_color")
+        dateSelectViewModel.userDefaults(piker: DefaultsName.init(datePicker: self.datePicker ?? "", servico: self.servico ?? "", serviceIcon: self.serviceIcon ?? "", servicoColor: self.servicoColor ?? ""))
         
         self.dismiss(animated: true,completion: nil)
     }

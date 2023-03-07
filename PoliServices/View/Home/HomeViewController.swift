@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import UserNotifications
+
 
 @available(iOS 13.0, *)
-class HomeViewController: UIViewController{
+class HomeViewController: UIViewController {
     
     //MARK: - Variables
     private var timer: Timer?
     private var alert: Alert?
+//    private var notificationUtility = LocalNotification.shared
     
     
     //MARK: - ViewModel
@@ -36,6 +39,7 @@ class HomeViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UNUserNotificationCenter.current().delegate = self
         self.alert = Alert(controller: self)
         
         homeViewModel.initTimer(setup: setupUI )
@@ -73,28 +77,53 @@ extension HomeViewController {
             self.homeView.serviceButtonIsHidden(active: setupData.hasService)
         }
     }
-    
 }
 
 
 //MARK: - check out alert
 @available(iOS 13.0, *)
-extension HomeViewController {
+extension HomeViewController: UNUserNotificationCenterDelegate {
+    
     
     private func alertCheck() {
         let dataTime = homeViewModel.timeService()
+        
         if dataTime {
             alertService()
         }
     }
     
+    
     private func alertService() {
         self.alert?.getVerificateAlert(title: "Atenção", message: "Deseja cancelar o serviço", okCompletion: {
-            let detailsService = DetailsViewController()
-            let navVC  = UINavigationController(rootViewController: detailsService)
-            navVC.modalPresentationStyle = .fullScreen
-            self.present(navVC, animated: true, completion: nil)
+            self.navigationScreen()
         })
+    }
+    
+    
+    private func alertNotification() {
+        let setupData = homeViewModel.setup()
+        guard let dataTime = homeViewModel.subtract15MinutesTimeService(from:setupData.serviceDate) else { return }
+        
+        alert?.checkForPermission(dateStr: dataTime,
+                                  title: "Serviço",
+                                  body: "faltam 15 minutos para finalizar o serviço.",
+                                  isDaily: true)
+    }
+    
+    //navigation screen in notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        navigationScreen()
+        
+        completionHandler()
+    }
+    
+    
+    private func navigationScreen() {
+        let detailsService = DetailsViewController()
+        let navVC  = UINavigationController(rootViewController: detailsService)
+        navVC.modalPresentationStyle = .fullScreen
+        self.present(navVC, animated: true, completion: nil)
     }
 }
 
