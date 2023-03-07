@@ -14,10 +14,14 @@ final class HomeViewModel {
     //MARK: - Variables
     private var timer: Timer?
     
+    //MARK: - class Persistence data
+//    private var persistenceData = Persistence()
+    
 
     //MARK: - Rules functions
     func setup() -> SetupData {
         let currentDate = Date()
+        
         guard let serviceIcon  = UserDefaults.standard.string(forKey: "service_icon")  else { return SetupData(toCompleteService: "",
                                                                                                                hasService: false,
                                                                                                                createDate: "",
@@ -50,7 +54,8 @@ final class HomeViewModel {
                                                                                                                serviceDate: "",
                                                                                                                serviceIcon: "") }
 
-        
+       
+
         let data = setupService(serviceDate: serviceDate)
         let toCompleteService = timeLeftToCompleteService(finishDate: data)
         let hasService = data > currentDate
@@ -69,8 +74,8 @@ final class HomeViewModel {
     func timeLeftToCompleteService(finishDate: Date) -> String {
         let currentDate = Date()
         let timeInterval = finishDate.timeIntervalSince(currentDate)
-        let hoursLeft = Int(timeInterval / 3600)
-        let minutesLeft = Int((timeInterval.truncatingRemainder(dividingBy: 3600)) / 60)
+        let hoursLeft = Int((timeInterval / 3600))
+        let minutesLeft = Int((timeInterval.truncatingRemainder(dividingBy: 3600)) / 60) + 1
         
         if hoursLeft > 0 {
             return "Faltam \(hoursLeft) hora(s) e \(minutesLeft) minuto(s) para o atendimento."
@@ -93,8 +98,7 @@ final class HomeViewModel {
 
         return hoursLeft == 0 && minutesLeft == 15 ? true : false
     }
-    
-    
+       
     
     func removeUserDefaults() {
         UserDefaults.standard.removeObject(forKey: "service_date")
@@ -116,6 +120,22 @@ final class HomeViewModel {
 
         return data
     }
+    
+    
+    func subtract15MinutesTimeService(from dateStr: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+        guard let date = dateFormatter.date(from: dateStr) else {
+            return nil
+        }
+        
+        let calendar = Calendar.current
+        let newDate = calendar.date(byAdding: .minute, value: -15, to: date)!
+        
+        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
+        let newDateStr = dateFormatter.string(from: newDate)
+        return newDateStr
+    }
 
 
     func initTimer(setup: @escaping () -> ()) {
@@ -131,6 +151,7 @@ final class HomeViewModel {
                 setup()
             })
         RunLoop.main.add(timer, forMode: .default)
+        
         self.timer = timer
     }
 }
