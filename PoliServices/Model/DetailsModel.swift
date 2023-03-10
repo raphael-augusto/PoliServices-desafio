@@ -11,7 +11,6 @@ import Foundation
 struct DetailsElement: Decodable {
     let id: String
     var description: String
-//    let reason: String
 }
 
 typealias Details = [DetailsElement]

@@ -89,10 +89,7 @@ extension DateSelectViewController: DateSelectViewDelegate {
         
         // Set date format
         formatter.dateFormat = "MM/dd/yyyy HH:mm"
-        
-        //let hours = Double(serviceDuration!) / 60
-        //let minutes = Double(serviceDuration!).truncatingRemainder(dividingBy: 60)
-        
+                
         // Apply date format and hour
         var selectedDate = sender.date
         selectedDate = selectedDate.addingTimeInterval(Double(serviceDuration!) * 60)

@@ -29,21 +29,6 @@ class Alert: NSObject {
         self.controller.present(alertController, animated: true, completion: nil)
     }
     
-//    func getVerificateAlert(title: String, message: String, completion: (() -> Void )? = nil ) {
-//        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        let okAction = UIAlertAction(title: "Ok", style: .cancel) { action in
-//            completion?()
-//        }
-//
-//        alertController.addAction(okAction)
-//
-//        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel) { (action) in
-//            completion?()
-//        }
-//        alertController.addAction(cancelAction)
-//
-//        self.controller.present(alertController, animated: true, completion: nil)
-//    }
     
     func getVerificateAlert(title: String, message: String, okCompletion: (() -> Void)? = nil, cancelCompletion: (() -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

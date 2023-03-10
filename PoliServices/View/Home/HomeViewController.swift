@@ -13,10 +13,7 @@ import UserNotifications
 class HomeViewController: UIViewController {
     
     //MARK: - Variables
-    private var timer: Timer?
     private var alert: Alert?
-//    private var notificationUtility = LocalNotification.shared
-    
     
     //MARK: - ViewModel
     private var homeViewModel = HomeViewModel()
@@ -43,7 +40,7 @@ class HomeViewController: UIViewController {
         self.alert = Alert(controller: self)
         
         homeViewModel.initTimer(setup: setupUI )
-        alertCheck()
+        alertNotification()
     }
     
     
@@ -84,23 +81,6 @@ extension HomeViewController {
 @available(iOS 13.0, *)
 extension HomeViewController: UNUserNotificationCenterDelegate {
     
-    
-    private func alertCheck() {
-        let dataTime = homeViewModel.timeService()
-        
-        if dataTime {
-            alertService()
-        }
-    }
-    
-    
-    private func alertService() {
-        self.alert?.getVerificateAlert(title: "Atenção", message: "Deseja cancelar o serviço", okCompletion: {
-            self.navigationScreen()
-        })
-    }
-    
-    
     private func alertNotification() {
         let setupData = homeViewModel.setup()
         guard let dataTime = homeViewModel.subtract15MinutesTimeService(from:setupData.serviceDate) else { return }
@@ -117,24 +97,27 @@ extension HomeViewController: UNUserNotificationCenterDelegate {
         
         completionHandler()
     }
-    
-    
-    private func navigationScreen() {
-        let detailsService = DetailsViewController()
-        let navVC  = UINavigationController(rootViewController: detailsService)
-        navVC.modalPresentationStyle = .fullScreen
-        self.present(navVC, animated: true, completion: nil)
-    }
 }
 
 
-//MARK: - Navigation newService
+//MARK: - New Service
 @available(iOS 13.0, *)
 extension HomeViewController: HomeViewDelegate {
     
     func newService() {
-        let newService = ServiceViewController()
-        let navVC  = UINavigationController(rootViewController: newService)
+        navigationScreen()
+    }
+}
+
+
+
+//MARK: - Navigation Screens
+@available(iOS 13.0, *)
+extension HomeViewController {
+    
+    private func navigationScreen() {
+        let detailsService = DetailsViewController()
+        let navVC  = UINavigationController(rootViewController: detailsService)
         navVC.modalPresentationStyle = .fullScreen
         self.present(navVC, animated: true, completion: nil)
     }

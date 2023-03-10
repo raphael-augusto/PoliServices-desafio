@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 
 
+@available(iOS 13.0, *)
 final class HomeViewModel {
     
     //MARK: - Variables
@@ -137,7 +139,7 @@ final class HomeViewModel {
         return newDateStr
     }
 
-
+    
     func initTimer(setup: @escaping () -> ()) {
         let now: Date = Date()
         let calendar: Calendar = Calendar.current
