@@ -11,10 +11,6 @@ import UserNotifications
 
 @available(iOS 13.0, *)
 class HomeViewController: UIViewController {
-
-    
-    //MARK: - Variables
-    private var alert: Alert?
     
     //MARK: - ViewModel
     private var homeViewModel = HomeViewModel()
@@ -39,7 +35,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UNUserNotificationCenter.current().delegate = self
-        self.alert = Alert(controller: self)
         homeViewModel.delegate = self
         
         homeViewModel.initTimer(setup: setupUI )
@@ -69,10 +64,7 @@ extension HomeViewController: HomeDelegate {
                              color: data.serviceColor,
                              textTime: data.toCompleteService
         )
-        
-        //push notification
-        alertApp()
-        
+    
         HomeView.animate(withDuration: 0.3) {
             self.homeView.cardServiceIsHidden(active: false)
             self.homeView.serviceButtonIsHidden(active: true)
@@ -92,16 +84,6 @@ extension HomeViewController: HomeDelegate {
 @available(iOS 13.0, *)
 extension HomeViewController: UNUserNotificationCenterDelegate {
     
-    private func alertApp() {
-        guard let dateAlert = homeViewModel.alertNotification() else { return }
-    
-        alert?.checkForPermission(dateStr: dateAlert,
-                                  title: "Serviço",
-                                  body: "faltam 15 minutos para finalizar o serviço.",
-                                  isDaily: true)
-    }
-    
-
     //navigation screen in notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         navigationDetailsServiceScreen()

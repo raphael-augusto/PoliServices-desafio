@@ -82,29 +82,6 @@ final class HomeViewModel {
     }
 
     
-    func subtract15MinutesTimeService(from dateStr: String) -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
-        guard let date = dateFormatter.date(from: dateStr) else {
-            return nil
-        }
-        
-        let calendar = Calendar.current
-        let newDate = calendar.date(byAdding: .minute, value: -15, to: date)!
-        
-        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
-        let newDateStr = dateFormatter.string(from: newDate)
-        return newDateStr
-    }
-
-    
-    func alertNotification() -> String? {
-        guard let service = persistence.getSetupData() else { return nil }
-         let data = subtract15MinutesTimeService(from: service.serviceDate)
-        
-        return data
-    }
-    
     func initTimer(setup: @escaping () -> ()) {
         let now: Date = Date()
         let calendar: Calendar = Calendar.current

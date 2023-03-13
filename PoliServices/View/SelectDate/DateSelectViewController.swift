@@ -18,6 +18,8 @@ class DateSelectViewController: UIViewController {
     var serviceDuration: Int
     var datePicker: String?
     
+    private var alert: Alert?
+    
     
     //MARK: - ViewModel
     private var dateSelectViewModel = DateSelectViewModel()
@@ -39,6 +41,7 @@ class DateSelectViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.alert = Alert(controller: self)
         
         config()
     }
@@ -78,12 +81,30 @@ extension DateSelectViewController {
     
     
     @objc func rightHandAction() {
+        dateSelect()
+        
+        //push notification
+        alertApp()
+        
+        self.dismiss(animated: true,completion: nil)
+    }
+    
+    
+    private func dateSelect() {
         dateSelectViewModel.userDefaults(addDefaults: DefaultsName.init(datePicker: self.datePicker ?? "",
                                                                         servico: self.servico ,
                                                                         serviceIcon: self.serviceIcon ,
                                                                         servicoColor: self.servicoColor ))
-        
-        self.dismiss(animated: true,completion: nil)
+    }
+    
+
+    private func alertApp() {
+        guard let dateAlert = dateSelectViewModel.alertNotification() else { return }
+    
+        alert?.checkForPermission(dateStr: dateAlert,
+                                  title: "Serviço",
+                                  body: "faltam 15 minutos para finalizar o serviço.",
+                                  isDaily: true)
     }
 }
 
