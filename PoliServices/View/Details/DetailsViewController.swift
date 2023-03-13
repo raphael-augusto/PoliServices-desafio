@@ -208,22 +208,30 @@ extension DetailsViewController: DetailsViewDelegate {
 @available(iOS 13.0, *)
 extension DetailsViewController: DetailsViewModelProtocols {
 
-    func success() {
+    //GET
+    func successGet() {
         DispatchQueue.main.async { [self] in
             self.detailsView.loadResultPickerView()
         }
     }
     
     
-    func failure() {
-        print("Error")
+    func failureGet() {
+        print("Error - GET")
     }
-    
     
     func getData() {
         detailsViewModel?.fetchcCursesData()
     }
     
+    
+    //POST
+    func successPost() {}
+    
+    func failurepost() {
+        print("Error - POST")
+    }
+
     
     func removeService(data: SetupCancel) {
         detailsView.setupDetails(cell: data)

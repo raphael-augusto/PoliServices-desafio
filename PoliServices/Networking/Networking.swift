@@ -17,7 +17,7 @@ protocol NetworkingProtocol {
 struct Networking: NetworkingProtocol {
     
     private var session: URLSession
-    private let baseURL = "https://9a1c098c-8f75-47ad-a938-ad3f9179490a.mock.pstmn.io/"
+    private let baseURL = "https://run.mocky.io/v3/"
     
     
     init(session: URLSession = .shared) {

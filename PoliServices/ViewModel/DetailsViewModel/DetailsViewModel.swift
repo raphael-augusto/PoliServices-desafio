@@ -10,8 +10,11 @@ import UIKit
 
 
 protocol DetailsViewModelProtocols: AnyObject {
-    func success()
-    func failure()
+    func successGet()
+    func failureGet()
+    func successPost()
+    func failurepost()
+    
     func removeService(data: SetupCancel)
     func showButton()
 }
@@ -41,12 +44,12 @@ final class DetailsViewModel {
             switch response {
             case let .success(data):
                 self.dataValue = data
-                self.delegate?.success()
+                self.delegate?.successGet()
                 print("Data -> \(self.dataValue)")
                 
             case let .failure(error):
                 print("ViewModel -> \(error.localizedDescription)")
-                self.delegate?.failure()
+                self.delegate?.failureGet()
             }
         }
     }
@@ -60,11 +63,11 @@ final class DetailsViewModel {
             switch response {
             case let .success(data):
                 print("DataPost -> \(data)")
-                self.delegate?.success()
+                self.delegate?.successPost()
                 
             case let .failure(error):
                 print("ErroPost -> \(error.localizedDescription)")
-                self.delegate?.failure()
+                self.delegate?.failurepost()
             }
         }
     }
