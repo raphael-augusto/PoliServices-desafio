@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 
 
+protocol HomeDelegate: AnyObject {
+    func showService(data: SetupData)
+    func showButton()
+}
+
 
 @available(iOS 13.0, *)
 final class HomeViewModel {
@@ -17,96 +22,33 @@ final class HomeViewModel {
     private var timer: Timer?
     
     //MARK: - class Persistence data
-//    private var persistenceData = Persistence()
+    let persistence = Persistence()
+    weak var delegate: (HomeDelegate)?
     
 
     //MARK: - Rules functions
-    func setup() -> SetupData {
+    func setup() {
         let currentDate = Date()
         
-        guard let serviceIcon  = UserDefaults.standard.string(forKey: "service_icon")  else { return SetupData(toCompleteService: "",
-                                                                                                               hasService: false,
-                                                                                                               createDate: "",
-                                                                                                               serviceName: "",
-                                                                                                               serviceColor: "",
-                                                                                                               serviceDate: "",
-                                                                                                               serviceIcon: "") }
+        guard var service = persistence.getSetupData() else {
+            delegate?.showButton()
+            return
+        }
         
-        guard let serviceName  = UserDefaults.standard.string(forKey: "service_name")  else { return SetupData(toCompleteService: "",
-                                                                                                               hasService: false,
-                                                                                                               createDate: "",
-                                                                                                               serviceName: "",
-                                                                                                               serviceColor: "",
-                                                                                                               serviceDate: "",
-                                                                                                               serviceIcon: "") }
-        
-        guard let serviceColor = UserDefaults.standard.string(forKey: "service_color") else { return SetupData(toCompleteService: "",
-                                                                                                               hasService: false,
-                                                                                                               createDate: "",
-                                                                                                               serviceName: "",
-                                                                                                               serviceColor: "",
-                                                                                                               serviceDate: "",
-                                                                                                               serviceIcon: "") }
-        
-        guard let serviceDate  = UserDefaults.standard.string(forKey: "service_date")  else { return SetupData(toCompleteService: "",
-                                                                                                               hasService: false,
-                                                                                                               createDate: "",
-                                                                                                               serviceName: "",
-                                                                                                               serviceColor: "",
-                                                                                                               serviceDate: "",
-                                                                                                               serviceIcon: "") }
-
-       
-
-        let data = setupService(serviceDate: serviceDate)
+        let data = setupService(serviceDate: service.serviceDate)
         let toCompleteService = timeLeftToCompleteService(finishDate: data)
+        service.toCompleteService = toCompleteService
+
+        //validation
         let hasService = data > currentDate
         
-        return SetupData(toCompleteService: toCompleteService,
-                         hasService: hasService,
-                         createDate: "",
-                         serviceName: serviceName,
-                         serviceColor: serviceColor,
-                         serviceDate: serviceDate,
-                         serviceIcon: serviceIcon)
-    }
-    
-    
-    
-    func timeLeftToCompleteService(finishDate: Date) -> String {
-        let currentDate = Date()
-        let timeInterval = finishDate.timeIntervalSince(currentDate)
-        let hoursLeft = Int((timeInterval / 3600))
-        let minutesLeft = Int((timeInterval.truncatingRemainder(dividingBy: 3600)) / 60) + 1
-        
-        if hoursLeft > 0 {
-            return "Faltam \(hoursLeft) hora(s) e \(minutesLeft) minuto(s) para o atendimento."
-        } else if minutesLeft > 0 {
-            return "Faltam \(minutesLeft) minuto(s) para o atendimento."
+        if hasService {
+            delegate?.showService(data: service)
+            
         } else {
-            return "O serviço já começou."
+            persistence.removeUserDefaults()
+            delegate?.showButton()
         }
-    }
-    
-    
-    func timeService() -> Bool {
-        let serviceDate  = UserDefaults.standard.string(forKey: "service_date") ?? ""
-        let data = setupService(serviceDate: serviceDate)
-        
-        let currentDate = Date()
-        let timeInterval = data.timeIntervalSince(currentDate)
-        let hoursLeft = Int(timeInterval / 3600)
-        let minutesLeft = Int((timeInterval.truncatingRemainder(dividingBy: 3600)) / 60)
-
-        return hoursLeft == 0 && minutesLeft == 15 ? true : false
-    }
-       
-    
-    func removeUserDefaults() {
-        UserDefaults.standard.removeObject(forKey: "service_date")
-        UserDefaults.standard.removeObject(forKey: "service_name")
-        UserDefaults.standard.removeObject(forKey: "service_icon")
-        UserDefaults.standard.removeObject(forKey: "service_color")
     }
     
     
@@ -124,6 +66,22 @@ final class HomeViewModel {
     }
     
     
+    func timeLeftToCompleteService(finishDate: Date) -> String {
+        let currentDate = Date()
+        let timeInterval = finishDate.timeIntervalSince(currentDate)
+        let hoursLeft = Int((timeInterval / 3600))
+        let minutesLeft = Int((timeInterval.truncatingRemainder(dividingBy: 3600)) / 60) + 1
+        
+        if hoursLeft > 0 {
+            return "Faltam \(hoursLeft) hora(s) e \(minutesLeft) minuto(s) para o atendimento."
+        } else if minutesLeft > 0 {
+            return "Faltam \(minutesLeft) minuto(s) para o atendimento."
+        } else {
+            return "O serviço já começou."
+        }
+    }
+
+    
     func subtract15MinutesTimeService(from dateStr: String) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
@@ -139,6 +97,13 @@ final class HomeViewModel {
         return newDateStr
     }
 
+    
+    func alertNotification() -> String? {
+        guard let service = persistence.getSetupData() else { return nil }
+         let data = subtract15MinutesTimeService(from: service.serviceDate)
+        
+        return data
+    }
     
     func initTimer(setup: @escaping () -> ()) {
         let now: Date = Date()

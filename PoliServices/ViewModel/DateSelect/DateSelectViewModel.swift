@@ -10,10 +10,10 @@ import Foundation
 
 final class DateSelectViewModel {
     
-    func userDefaults(piker: DefaultsName) {
-        UserDefaults.standard.set(piker.datePicker, forKey: "service_date")
-        UserDefaults.standard.set(piker.servico, forKey: "service_name")
-        UserDefaults.standard.set(piker.serviceIcon, forKey: "service_icon")
-        UserDefaults.standard.set(piker.servicoColor, forKey: "service_color")
+    func userDefaults(addDefaults: DefaultsName) {
+        UserDefaults.standard.set(addDefaults.datePicker, forKey: "service_date")
+        UserDefaults.standard.set(addDefaults.servico, forKey: "service_name")
+        UserDefaults.standard.set(addDefaults.serviceIcon, forKey: "service_icon")
+        UserDefaults.standard.set(addDefaults.servicoColor, forKey: "service_color")
     }
 }

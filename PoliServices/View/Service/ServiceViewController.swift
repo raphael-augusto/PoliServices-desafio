@@ -107,6 +107,8 @@ extension ServiceViewController: UICollectionViewDataSource, UICollectionViewDel
                                                   serviceIcon: dataIndexPath.icon,
                                                   servicoColor: dataIndexPath.color,
                                                   serviceDuration: dataIndexPath.duration)
+
+
         self.navigationController?.pushViewController(newService, animated: true)
     }
 }

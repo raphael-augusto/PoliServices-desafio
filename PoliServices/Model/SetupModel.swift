@@ -8,7 +8,7 @@
 import Foundation
 
 struct SetupData {
-    let toCompleteService: String
+    var toCompleteService: String
     let hasService: Bool
     let createDate: String
     let serviceName: String
@@ -18,11 +18,11 @@ struct SetupData {
 }
 
 struct SetupCancel {
-    let startDate: String
-    let startTime: String
-    let closingDate: String
-    let closingTime: String
-    let createDate: String
+    var startDate: String
+    var startTime: String
+    var closingDate: String
+    var closingTime: String
+    var createDate: String
     let serviceName: String
     let serviceColor: String
     let serviceDate: String

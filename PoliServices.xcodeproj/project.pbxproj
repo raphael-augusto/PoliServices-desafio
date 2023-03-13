@@ -111,6 +111,7 @@
 				6439A3D929AD901B00E95399 /* Extension */,
 				6474A54B29720FF000885F2C /* Utility */,
 				648E2F372989E8690098F504 /* Networking */,
+				64E0DCA029BE8369003B3C5B /* Persistence */,
 				641E8A25297F729200DC3715 /* Model */,
 				6474A54929720FD300885F2C /* ViewModel */,
 				6474A54A29720FDA00885F2C /* View */,
@@ -150,7 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				641E8A31298170E600DC3715 /* HomeViewModel.swift */,
-				6442CA5129B7BBA3001AA5E7 /* Persistence.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -257,8 +257,8 @@
 		647EE4AB299DB90D0091722D /* Details */ = {
 			isa = PBXGroup;
 			children = (
-				647EE4AC299DB9340091722D /* DetailsViewController.swift */,
 				647EE4AE299DB9520091722D /* DetailsView.swift */,
+				647EE4AC299DB9340091722D /* DetailsViewController.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -279,6 +279,14 @@
 				64DFF94F297CC168006996BF /* ServiceCardView.swift */,
 			);
 			path = Card;
+			sourceTree = "<group>";
+		};
+		64E0DCA029BE8369003B3C5B /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				6442CA5129B7BBA3001AA5E7 /* Persistence.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

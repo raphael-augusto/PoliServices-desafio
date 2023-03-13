@@ -11,6 +11,7 @@ import UserNotifications
 
 @available(iOS 13.0, *)
 class HomeViewController: UIViewController {
+
     
     //MARK: - Variables
     private var alert: Alert?
@@ -31,6 +32,7 @@ class HomeViewController: UIViewController {
     //MARK: - life cycle
     override func loadView() {
         self.view = homeView
+     
     }
     
     
@@ -38,9 +40,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         UNUserNotificationCenter.current().delegate = self
         self.alert = Alert(controller: self)
+        homeViewModel.delegate = self
         
         homeViewModel.initTimer(setup: setupUI )
-        alertNotification()
     }
     
     
@@ -53,25 +55,34 @@ class HomeViewController: UIViewController {
 
 //MARK: - Setup UI Screen
 @available(iOS 13.0, *)
-extension HomeViewController {
+extension HomeViewController: HomeDelegate {
     
-    private func setupUI() {
-        let setupData = homeViewModel.setup()
+    func setupUI(){
+        homeViewModel.setup()
+    }
+    
+    
+    func showService(data: SetupData){
+        homeView.serviceCard(icon: data.serviceIcon,
+                             nameServiceText: data.serviceName,
+                             dateAndHourText: data.serviceDate,
+                             color: data.serviceColor,
+                             textTime: data.toCompleteService
+        )
         
-        if setupData.hasService {
-            homeView.ToCompleteService(textTime: setupData.toCompleteService)
-            homeView.serviceCardView.setupCardService(icon: setupData.serviceIcon,
-                                                      nameServiceText: setupData.serviceName,
-                                                      dateAndHourText: setupData.serviceDate,
-                                                      color: setupData.serviceColor)
-
-        } else {
-            homeViewModel.removeUserDefaults()
-        }
-
+        //push notification
+        alertApp()
+        
         HomeView.animate(withDuration: 0.3) {
-            self.homeView.cardServiceIsHidden(active: !setupData.hasService)
-            self.homeView.serviceButtonIsHidden(active: setupData.hasService)
+            self.homeView.cardServiceIsHidden(active: false)
+            self.homeView.serviceButtonIsHidden(active: true)
+        }
+    }
+    
+    func showButton(){
+        HomeView.animate(withDuration: 0.3) {
+            self.homeView.cardServiceIsHidden(active: true)
+            self.homeView.serviceButtonIsHidden(active: false)
         }
     }
 }
@@ -81,20 +92,20 @@ extension HomeViewController {
 @available(iOS 13.0, *)
 extension HomeViewController: UNUserNotificationCenterDelegate {
     
-    private func alertNotification() {
-        let setupData = homeViewModel.setup()
-        guard let dataTime = homeViewModel.subtract15MinutesTimeService(from:setupData.serviceDate) else { return }
-        
-        alert?.checkForPermission(dateStr: dataTime,
+    private func alertApp() {
+        guard let dateAlert = homeViewModel.alertNotification() else { return }
+    
+        alert?.checkForPermission(dateStr: dateAlert,
                                   title: "Serviço",
                                   body: "faltam 15 minutos para finalizar o serviço.",
                                   isDaily: true)
     }
     
+
     //navigation screen in notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        navigationScreen()
-        
+        navigationDetailsServiceScreen()
+
         completionHandler()
     }
 }
@@ -105,7 +116,7 @@ extension HomeViewController: UNUserNotificationCenterDelegate {
 extension HomeViewController: HomeViewDelegate {
     
     func newService() {
-        navigationScreen()
+        navigationNewServiceScreen()
     }
 }
 
@@ -115,9 +126,17 @@ extension HomeViewController: HomeViewDelegate {
 @available(iOS 13.0, *)
 extension HomeViewController {
     
-    private func navigationScreen() {
+    private func navigationDetailsServiceScreen() {
         let detailsService = DetailsViewController()
         let navVC  = UINavigationController(rootViewController: detailsService)
+        navVC.modalPresentationStyle = .fullScreen
+        self.present(navVC, animated: true, completion: nil)
+    }
+    
+    
+    private func navigationNewServiceScreen() {
+        let newService = ServiceViewController()
+        let navVC  = UINavigationController(rootViewController: newService)
         navVC.modalPresentationStyle = .fullScreen
         self.present(navVC, animated: true, completion: nil)
     }
