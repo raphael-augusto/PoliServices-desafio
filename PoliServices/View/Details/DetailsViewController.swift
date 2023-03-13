@@ -199,7 +199,7 @@ extension DetailsViewController: DetailsViewDelegate {
     func cancellationRecord() {
         detailsViewModel?.removeDefaulst()
         
-        self.navigationController?.popToRootViewController(animated: true)
+        self.dismiss(animated: true,completion: nil)
     }
 }
 
