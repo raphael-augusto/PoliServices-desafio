@@ -142,7 +142,7 @@ final class  HomeView : UIView {
     }()
     
     
-    lazy var serviceCardView: ServiceCardView = {
+    private lazy var serviceCardView: ServiceCardView = {
         let view = ServiceCardView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -194,11 +194,17 @@ final class  HomeView : UIView {
         serviceButton.isHidden = active
         serviceButton.alpha    = active ? 0 : 1
     }
+        
     
-    
-    public func ToCompleteService(textTime: String) {
+    public func serviceCard (icon: String, nameServiceText: String, dateAndHourText: String, color: String, textTime: String) {
+        serviceCardView.setupCardService(icon: icon,
+                                         nameServiceText: nameServiceText,
+                                         dateAndHourText: dateAndHourText,
+                                         color: color)
         timeLeftToCompleteServiceLabel.text = textTime
     }
+    
+
 }
 
 

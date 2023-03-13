@@ -10,14 +10,22 @@ import UIKit
 
 
 protocol DetailsViewModelProtocols: AnyObject {
-    func success()
-    func failure()
+    func successGet()
+    func failureGet()
+    func successPost()
+    func failurepost()
+    
+    func removeService(data: SetupCancel)
+    func showButton()
 }
+
 
 final class DetailsViewModel {
 
     //MARK: - Delegate and networking
     private let networking = Networking()
+    private let persistence = Persistence()
+    
     weak var delegate: (DetailsViewModelProtocols)?
     
     private(set) var dataValue: [DetailsElement]  = []
@@ -36,15 +44,16 @@ final class DetailsViewModel {
             switch response {
             case let .success(data):
                 self.dataValue = data
-                self.delegate?.success()
+                self.delegate?.successGet()
                 print("Data -> \(self.dataValue)")
                 
             case let .failure(error):
                 print("ViewModel -> \(error.localizedDescription)")
-                self.delegate?.failure()
+                self.delegate?.failureGet()
             }
         }
     }
+    
     
     func postCancelOrder(reason: String) {
         networking.post(endpoint: .cancelReason, parameters: ["reason": reason]) { [weak self]  (response: Result<CancelResponse, NetworkinError>) in
@@ -54,16 +63,16 @@ final class DetailsViewModel {
             switch response {
             case let .success(data):
                 print("DataPost -> \(data)")
-                self.delegate?.success()
+                self.delegate?.successPost()
                 
             case let .failure(error):
                 print("ErroPost -> \(error.localizedDescription)")
-                self.delegate?.failure()
+                self.delegate?.failurepost()
             }
         }
     }
     
-    
+    //MARK: - Piker view
     var count: Int {
         return dataValue.count
     }
@@ -74,66 +83,35 @@ final class DetailsViewModel {
     }
     
     
-    
-    func setup() -> SetupCancel {
-        guard let serviceIcon  = UserDefaults.standard.string(forKey: "service_icon")  else { return SetupCancel(startDate: "",
-                                                                                                                 startTime: "",
-                                                                                                                 closingDate: "",
-                                                                                                                 closingTime: "",
-                                                                                                                 createDate: "",
-                                                                                                                 serviceName: "",
-                                                                                                                 serviceColor: "",
-                                                                                                                 serviceDate: "",
-                                                                                                                 serviceIcon: "")}
+    //MARK: - Data visualization rules
+    func setupRemove() {
         
-        guard let serviceName  = UserDefaults.standard.string(forKey: "service_name")  else { return SetupCancel(startDate: "",
-                                                                                                                 startTime: "",
-                                                                                                                 closingDate: "",
-                                                                                                                 closingTime: "",
-                                                                                                                 createDate: "",
-                                                                                                                 serviceName: "",
-                                                                                                                 serviceColor: "",
-                                                                                                                 serviceDate: "",
-                                                                                                                 serviceIcon: "") }
-        
-        guard let serviceColor = UserDefaults.standard.string(forKey: "service_color") else { return SetupCancel(startDate: "",
-                                                                                                                 startTime: "",
-                                                                                                                 closingDate: "",
-                                                                                                                 closingTime: "",
-                                                                                                                 createDate: "",
-                                                                                                                 serviceName: "",
-                                                                                                                 serviceColor: "",
-                                                                                                                 serviceDate: "",
-                                                                                                                 serviceIcon: "") }
-        
-        guard let serviceDate  = UserDefaults.standard.string(forKey: "service_date")  else { return SetupCancel(startDate: "",
-                                                                                                                 startTime: "",
-                                                                                                                 closingDate: "",
-                                                                                                                 closingTime: "",
-                                                                                                                 createDate: "",
-                                                                                                                 serviceName: "",
-                                                                                                                 serviceColor: "",
-                                                                                                                 serviceDate: "",
-                                                                                                                 serviceIcon: "") }
+        guard var service = persistence.getSetupDataRemove() else {
+            delegate?.showButton()
+            return
+        }
 
 
-        let data = setupService(serviceDate: serviceDate)
+        let data = setupService(serviceDate: service.serviceDate)
         let dateFormated = formatedData(data)
         let hourFormated = dateToTimeString(date: data)
-           
         
-        return SetupCancel(startDate: dateFormated,
-                           startTime: hourFormated,
-                           closingDate: dateFormated,
-                           closingTime: hourFormated,
-                           createDate: dateFormated,
-                           serviceName: serviceName,
-                           serviceColor: serviceColor,
-                           serviceDate: serviceDate,
-                           serviceIcon: serviceIcon)
+        service.startDate   = dateFormated
+        service.startTime   = hourFormated
+        service.closingDate = dateFormated
+        service.closingTime = hourFormated
+        service.createDate  = dateFormated
+        
+        let finishDate = (timeFinish())
+        
+        if finishDate {
+            delegate?.removeService(data: service)
+
+        } else {
+            delegate?.showButton()
+        }
     }
     
-   
     
     private func setupService(serviceDate: String) -> Date {
         let currentDate = Date()
@@ -163,7 +141,6 @@ final class DetailsViewModel {
     }
 
     
- 
     func timeFinish() -> Bool {
         let serviceDate  = UserDefaults.standard.string(forKey: "service_date") ?? ""
         let data = setupService(serviceDate: serviceDate)
@@ -175,12 +152,7 @@ final class DetailsViewModel {
         return hoursLeft <= 2 ? true : false
     }
     
-
-    
-    func removeDefaults() {
-        UserDefaults.standard.removeObject(forKey: "service_date")
-        UserDefaults.standard.removeObject(forKey: "service_name")
-        UserDefaults.standard.removeObject(forKey: "service_icon")
-        UserDefaults.standard.removeObject(forKey: "service_color")
+    func removeDefaulst() {
+        persistence.removeUserDefaults()
     }
 }

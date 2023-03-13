@@ -31,7 +31,7 @@ final class DateSelectView: UIView {
         return lb
     }()
     
-    lazy var datePicker: UIDatePicker = {
+    private lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         
@@ -66,10 +66,6 @@ final class DateSelectView: UIView {
     private func setup() {
         initLayout()
     }
-    
-    
-
-    
 }
 
 //MARK: - Components and Constraints

@@ -150,7 +150,6 @@ final class DetailsView: UIView {
     private lazy var stackViewContainerCancellationInformation: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             cancellationInformationLabel,
-//            cancellatioLabel,
             optionCancellatioLabel,
             reasonForCancellationPickerView
         ])

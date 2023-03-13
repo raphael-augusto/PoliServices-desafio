@@ -38,9 +38,10 @@ class DetailsViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.alert = Alert(controller: self)
-        alertTime()
         self.detailsViewModel = DetailsViewModel(delegate: self)
-
+        
+        alertTime()
+        
         config()
     }
 }
@@ -59,7 +60,6 @@ extension DetailsViewController {
         getData()
         
         setupUIDetails()
-        finishService()
     }
     
     //Action leftBarButton
@@ -74,20 +74,7 @@ extension DetailsViewController {
     
     
     private func setupUIDetails() {
-        let setupData = (detailsViewModel?.setup())!
-        
-        detailsView.setupDetails(cell: setupData)
-    }
-    
-    
-    private func finishService() {
-        let setupData = (detailsViewModel?.timeFinish())
-        
-        if setupData! {
-            detailsView.configureButtonEnable(true)
-        }else {
-            detailsView.configureButtonEnable(false)
-        }
+        detailsViewModel?.setupRemove()
     }
 }
 
@@ -210,31 +197,49 @@ extension  DetailsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 extension DetailsViewController: DetailsViewDelegate {
     
     func cancellationRecord() {
-        detailsViewModel?.removeDefaults()
+        detailsViewModel?.removeDefaulst()
         
-        let home = HomeViewController()
-        self.navigationController?.pushViewController(home, animated: true)
+        self.dismiss(animated: true,completion: nil)
     }
 }
 
 
-//MARK: - API
+//MARK: - API And ViewModel
 @available(iOS 13.0, *)
 extension DetailsViewController: DetailsViewModelProtocols {
-    
-    func success() {
+
+    //GET
+    func successGet() {
         DispatchQueue.main.async { [self] in
             self.detailsView.loadResultPickerView()
         }
     }
     
     
-    func failure() {
-        print("Error")
+    func failureGet() {
+        print("Error - GET")
     }
-    
     
     func getData() {
         detailsViewModel?.fetchcCursesData()
+    }
+    
+    
+    //POST
+    func successPost() {}
+    
+    func failurepost() {
+        print("Error - POST")
+    }
+
+    
+    func removeService(data: SetupCancel) {
+        detailsView.setupDetails(cell: data)
+        detailsView.configureButtonEnable(true)
+    }
+    
+
+    func showButton() {
+        detailsView.configureButtonEnable(false)
     }
 }

@@ -12,11 +12,14 @@ import UIKit
 class DateSelectViewController: UIViewController {
 
     //MARK: - Variable
-    var servico: String?
-    var serviceIcon: String?
-    var servicoColor: String?
+    var servico: String
+    var serviceIcon: String
+    var servicoColor: String
+    var serviceDuration: Int
     var datePicker: String?
-    var serviceDuration: Int?
+    
+    private var alert: Alert?
+    
     
     //MARK: - ViewModel
     private var dateSelectViewModel = DateSelectViewModel()
@@ -38,21 +41,24 @@ class DateSelectViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.alert = Alert(controller: self)
         
         config()
     }
     
     init(
-        servico: String? = nil,
-        serviceIcon: String? = nil,
-        servicoColor: String? = nil,
-        serviceDuration: Int? = nil
+        servico: String,
+        serviceIcon: String,
+        servicoColor: String,
+        serviceDuration: Int
+        
     ) {
-        super.init(nibName: nil, bundle: nil)
         self.servico         = servico
         self.serviceIcon     = serviceIcon
         self.servicoColor    = servicoColor
         self.serviceDuration = serviceDuration
+
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -67,14 +73,38 @@ extension DateSelectViewController {
     
     private func config() {
         title = "Novo serviço"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(rightHandAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
+                                                                 style: .plain,
+                                                                 target: self,
+                                                                 action: #selector(rightHandAction))
     }
     
     
     @objc func rightHandAction() {
-        dateSelectViewModel.userDefaults(piker: DefaultsName.init(datePicker: self.datePicker ?? "", servico: self.servico ?? "", serviceIcon: self.serviceIcon ?? "", servicoColor: self.servicoColor ?? ""))
+        dateSelect()
+        
+        //push notification
+        alertApp()
         
         self.dismiss(animated: true,completion: nil)
+    }
+    
+    
+    private func dateSelect() {
+        dateSelectViewModel.userDefaults(addDefaults: DefaultsName.init(datePicker: self.datePicker ?? "",
+                                                                        servico: self.servico ,
+                                                                        serviceIcon: self.serviceIcon ,
+                                                                        servicoColor: self.servicoColor ))
+    }
+    
+
+    private func alertApp() {
+        guard let dateAlert = dateSelectViewModel.alertNotification() else { return }
+    
+        alert?.checkForPermission(dateStr: dateAlert,
+                                  title: "Serviço",
+                                  body: "faltam 15 minutos para finalizar o serviço.",
+                                  isDaily: true)
     }
 }
 
@@ -89,13 +119,10 @@ extension DateSelectViewController: DateSelectViewDelegate {
         
         // Set date format
         formatter.dateFormat = "MM/dd/yyyy HH:mm"
-        
-        //let hours = Double(serviceDuration!) / 60
-        //let minutes = Double(serviceDuration!).truncatingRemainder(dividingBy: 60)
-        
+                
         // Apply date format and hour
         var selectedDate = sender.date
-        selectedDate = selectedDate.addingTimeInterval(Double(serviceDuration!) * 60)
+        selectedDate = selectedDate.addingTimeInterval(Double(serviceDuration) * 60)
         
         let addedTimeString = formatter.string(from: selectedDate)
         
